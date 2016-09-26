@@ -10,12 +10,16 @@ bot.onText(/\/start/, function (msg) {
 
 bot.on('message', function(msg){
   var chatId = msg.chat.id;
-  var fileId = msg.document.file_id;
-  var mimeType = msg.document.mime_type;
-  if(utils.matchesTorrent(mimeType)){
-    bot.downloadFile(fileId, "tmp");
-    bot.sendMessage(chatId, "Just received "+msg.document.file_name+". Should I start downloading it?");
+  if(typeof(msg.document) !== 'undefined'){
+    var fileId = msg.document.file_id;
+    var mimeType = msg.document.mime_type;
+    if(utils.matchesTorrent(mimeType)){
+      bot.downloadFile(fileId, "tmp");
+      bot.sendMessage(chatId, "Just received "+msg.document.file_name+". Should I start downloading it?");
+    } else {
+      bot.sendMessage(chatId, "File: \""+msg.document.file_name+"\" is not a torrent file or a magnet link.");
+    }
   } else {
-    bot.sendMessage(chatId, "File: \""+msg.document.file_name+"\" is not a torrent file or a magnet link.");
+    bot.sendMessage(chatId, "Waiting for a torrent or a magnet link.");
   }
 });
