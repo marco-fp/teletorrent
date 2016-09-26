@@ -1,0 +1,25 @@
+{
+  "name": "teletorrent",
+  "version": "1.0.0",
+  "description": "Telegram bot that allows you to add and manage torrents on your computer, remotely.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarFerPra/teletorrent.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "torrent",
+    "awesome"
+  ],
+  "author": "Marco Fernandez Pranno",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarFerPra/teletorrent/issues"
+  },
+  "homepage": "https://github.com/MarFerPra/teletorrent#readme"
+}
