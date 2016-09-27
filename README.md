@@ -3,6 +3,7 @@ Telegram bot that allows you to add and manage torrents on your computer, remote
 
 ## Installation
 First, you need to create a telegram bot using [BotFather](https://telegram.me/botfather):
+
 1. Clone the repository
 2. Execute `npm install`
 
