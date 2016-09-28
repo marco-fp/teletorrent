@@ -8,7 +8,10 @@ bot.onText(/\/start/, function (msg) {
   bot.sendMessage(chatId, "Hi, I'm TeleTorrent. \nI'm here to help you download highly legal multimedia content from the information superhighway.");
 });
 
-bot.on('message', function(msg){
+bot.on('message', function(content){
+  console.log(msg);
+  message = content.text;
+  
   var chatId = msg.chat.id;
   if(typeof(msg.document) !== 'undefined'){
     var fileId = msg.document.file_id;
