@@ -1,5 +1,9 @@
-# teletorrent
+# Teletorrent
 Telegram bot that allows you to add and manage torrents on your computer, remotely.
+
+This project is being developed using [Node.js](https://nodejs.org/en/), [Node telegram bot API](https://github.com/yagop/node-telegram-bot-api) and [Transmission remote CLI](https://github.com/fagga/transmission-remote-cli).
+
+The main objective of the project besides the functionality itself is to learn the proper way to work using DevOps concepts and how to successfully deploy and manage the service running on a cloud server.
 
 ## Installation
 First, you need to create a telegram bot using [BotFather](https://telegram.me/botfather):
