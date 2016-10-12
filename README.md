@@ -3,6 +3,8 @@ Telegram bot that allows you to add and manage torrents on your computer, remote
 
 This project is being developed using [Node.js](https://nodejs.org/en/), [Node telegram bot API](https://github.com/yagop/node-telegram-bot-api) and [Transmission remote CLI](https://github.com/fagga/transmission-remote-cli).
 
+Using the latter to manage the torrents from the server application, answers petitions from any authorized Telegram client. (Would be really cool to develop an Electron client to connect to it too)
+
 The main objective of the project besides the functionality itself is to learn the proper way to work using DevOps concepts and how to successfully deploy and manage the service running on a cloud server.
 
 ## Services
