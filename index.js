@@ -21,14 +21,34 @@ bot.on('message', function(msg){
   if(typeof(msg.document) !== 'undefined'){
     var fileId = msg.document.file_id;
     var mimeType = msg.document.mime_type;
+
+    var fileName = msg.document.file_name;
+    var fileSize = msg.document.file_size;
+
     if(utils.matchesTorrent(mimeType)){
       bot.sendMessage(chatId, "Just received "+msg.document.file_name+". Should I start downloading it?", opts).then( function(sended) {
         var chatId = sended.chat.id;
         var messageId = sended.message_id;
         bot.onReplyToMessage(chatId, messageId, function (message) {
           if(message.text === 'yes' || message.text === 'Yes'){
-            bot.sendMessage(chatId, "Torrent saved, starting download...");
             bot.downloadFile(fileId, "tmp");
+
+            var fileAddedAt = message.date;
+
+            var download = new Download();
+            download.fileName = fileName;
+            download.fileSize = fileSize;
+            download.addedAt = fileAddedAt;
+
+            download.save(function(error) {
+              if (error) {
+                bot.sendMessage(chatId, "An error occurred while proccessing the torrent.");
+              } else {
+                bot.sendMessage(chatId, "Torrent saved, starting download.");
+              }
+            });
+
+
           } else {
             bot.sendMessage(chatId, "Unknown answer, sorry.");
           }
