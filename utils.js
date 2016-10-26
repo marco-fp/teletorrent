@@ -6,7 +6,7 @@ module.exports = {
     } else {
       return false;
     }
-  }
+  },
 
   menuSelector: function(message){
     switch (message) {
