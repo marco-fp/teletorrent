@@ -25,6 +25,7 @@ bot.onText(/\/help/, function (msg) {
 });
 
 bot.on('message', function(msg){
+  console.log(msg);
   processMessage(msg, this);
 });
 
@@ -33,7 +34,11 @@ processMessage = function(msg, bot) {
       utils.processDocument(msg, bot);
     } else {
       utils.menuSelector(msg.text, function(res){
-        bot.sendMessage(msg.chat.id, res);
+        if(res){
+          bot.sendMessage(msg.chat.id, res);
+        } else {
+            bot.sendMessage(msg.chat.id, "Error.");
+          }
       });
     }
 }

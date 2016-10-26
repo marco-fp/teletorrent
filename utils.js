@@ -11,7 +11,7 @@ module.exports = {
   },
 
   answerStart: function(message, callback){
-    if(message.text == '/start'){
+    if(message.text === '/start'){
       callback("Hi, I'm TeleTorrent. \nI'm here to help you download highly legal multimedia content from the information superhighway.");
     } else {
       callback('Error.');
@@ -19,7 +19,7 @@ module.exports = {
   },
 
   answerHelp: function(message, callback){
-    if(message.text == '/help'){
+    if(message.text === '/help'){
       callback("Available commands: \n - start / stop / pause / resume  <torrent_id> : Actions over defined Torrent. \n - [start/stop/pause/resume]-client : Actions over remote torrent client. \n - status : Displays information about the current downloads. \n")
     } else {
       callback('Error.');
@@ -27,8 +27,7 @@ module.exports = {
   },
 
   menuSelector: function(message, callback){
-
-    if(message.substring(0,5) == 'start'){
+    if(message.substring(0,5) === 'start'){
       callback('start');
       // Start downloading torrent
     } else if(message.substring(0,4) == 'stop'){
@@ -40,7 +39,7 @@ module.exports = {
     } else if(message.substring(0,6) == 'resume'){
       callback('resume');
       // Resume downloading torrent
-    }
+    } else {
 
     switch (message) {
       case 'start-client':
@@ -71,6 +70,7 @@ module.exports = {
         callback(null)
         // Unknown command
     }
+  }
   },
 
   processDocument: function(msg, bot){
