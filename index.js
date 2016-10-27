@@ -1,28 +1,44 @@
 var utils = require('./utils');
 var TelegramBot = require('node-telegram-bot-api');
 
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/testdb', function(error) {
+    if (error) {
+        console.log("Error connecting to database.");
+    } else {
+        console.log("Successfully connected to database.");
+    }
+});
+
 var bot = new TelegramBot(process.env.BOT_TOKEN, {polling: true});
 
 bot.onText(/\/start/, function (msg) {
-  var chatId = msg.chat.id;
-  bot.sendMessage(chatId, "Hi, I'm TeleTorrent. \nI'm here to help you download highly legal multimedia content from the information superhighway.");
+  utils.answerStart(msg, function(res){
+    bot.sendMessage(msg.chat.id, res);
+  });
+});
+bot.onText(/\/help/, function (msg) {
+  utils.answerHelp(msg, function(res){
+    bot.sendMessage(msg.chat.id, res);
+  });
 });
 
-bot.on('message', function(content){
+bot.on('message', function(msg){
   console.log(msg);
-  message = content.text;
-  
-  var chatId = msg.chat.id;
-  if(typeof(msg.document) !== 'undefined'){
-    var fileId = msg.document.file_id;
-    var mimeType = msg.document.mime_type;
-    if(utils.matchesTorrent(mimeType)){
-      bot.downloadFile(fileId, "tmp");
-      bot.sendMessage(chatId, "Just received "+msg.document.file_name+". Should I start downloading it?");
-    } else {
-      bot.sendMessage(chatId, "File: \""+msg.document.file_name+"\" is not a torrent file or a magnet link.");
-    }
-  } else {
-    bot.sendMessage(chatId, "Waiting for a torrent or a magnet link.");
-  }
+  processMessage(msg, this);
 });
+
+processMessage = function(msg, bot) {
+    if(typeof(msg.document) !== 'undefined'){
+      utils.processDocument(msg, bot);
+    } else {
+      utils.menuSelector(msg.text, function(res){
+        if(res){
+          bot.sendMessage(msg.chat.id, res);
+        } else {
+            bot.sendMessage(msg.chat.id, "Error.");
+          }
+      });
+    }
+}
