@@ -6,7 +6,6 @@ node_js:
     - "stable"
     - "6.4.0"
     - "4.5.0"
-    - "0.12.15"
 sudo: false
 script:
     - npm test
@@ -14,4 +13,3 @@ services:
   - mongodb
 after_success:
   - bash <(curl -s https://codecov.io/bash)
- 
