@@ -25,11 +25,6 @@ var db_url = 'mongodb://localhost/testdb';
 var db_user = process.env.DB_USER || null;
 var db_password = process.env.DB_PASSWORD || null;
 
-console.log("DB_URL: ", db_url);
-console.log("DB_USER: ", db_user);
-console.log("DB_PASSWORD: ", db_password);
-console.log("ENV: ", process.env.NODE_ENV);
-
 if(db_user && db_password && process.env.NODE_ENV == 'production'){
   console.log("-- PRODUCTION ENV --")
   db_url = 'mongodb://'+ db_user + ':' + db_password + '@ds147497.mlab.com:47497/teletorrent-db';
@@ -37,6 +32,10 @@ if(db_user && db_password && process.env.NODE_ENV == 'production'){
 
 mongoose.connect(db_url, {user: db_user, password: db_password}, function(error) {
     if (error) {
+        console.log("DB_URL: ", db_url);
+        console.log("DB_USER: ", db_user);
+        console.log("DB_PASSWORD: ", db_password);
+        console.log("ENV: ", process.env.NODE_ENV);
         console.log("Error connecting to database.", error);
     } else {
         console.log("Successfully connected to database.");
