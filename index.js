@@ -2,6 +2,7 @@
 if(process.env.NODE_ENV == 'production'){
   var express = require('express');
   var app = express();
+  listenToPort();
 }
 
 var utils = require('./utils');
@@ -60,10 +61,6 @@ function startBot(){
             }
         });
       }
-  }
-
-  if(process.env.NODE_ENV == 'production'){
-    listenToPort();
   }
 };
 
