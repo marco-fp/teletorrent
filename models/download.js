@@ -9,6 +9,9 @@ var DownloadSchema = new Schema({
   fileSize: {
     type: Number
   },
+  filePath: {
+    type: String
+  },
   addedAt: {
     type: Number // Could use date, but message dates are sent in unix time, its more convenient this way.
   }

@@ -5,7 +5,7 @@ module.exports = {
     clear: () => {
         fs.emptyDir('./tmp', function(err) {
             if (!err)
-                console.log('success!')
+                console.log('Tmp dir cleared.')
         })
     }
 }

@@ -22,17 +22,15 @@ module.exports = {
     });
 
     processMessage = function(msg, bot) {
-        if(typeof(msg.document) !== 'undefined'){
-          utils.processDocument(msg, bot);
-        } else {
-          utils.menuSelector(msg.text, function(res){
-            if(res){
-              bot.sendMessage(msg.chat.id, res);
-            } else {
-                bot.sendMessage(msg.chat.id, "Error.");
-              }
-          });
-        }
+      if(typeof(msg.document) !== 'undefined'){
+        utils.processDocument(msg, bot);
+      } else {
+        utils.menuSelector(msg.text, function(res){
+          if(res){
+            bot.sendMessage(msg.chat.id, res);
+          }
+        });
+      }
     }
   }
 }
