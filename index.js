@@ -1,11 +1,15 @@
 var dbConfig = require('./config/database.js');
 var herokuListener = require('./config/heroku.js');
+var tmpDir = require('./config/tmpDirHandler.js');
+
 var teleTorrent = require('./app/teletorrent.js');
 
 var mongoose = require('mongoose');
 
 if(process.env.NODE_ENV == 'production'){
   console.log("-- PRODUCTION ENV --")
+  console.log("Clearing tmp files...");
+  tmpDir.clear();
   herokuListener.start();
 }
 
