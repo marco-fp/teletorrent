@@ -1,9 +1,9 @@
 var Transmission = require('transmission');
 var transmission = new Transmission({
   port: 9091,
-  host: 127.0.0.1,
-  username: 'username',
-  password: 'password'	
+  host: '127.0.0.1',
+  username: '',
+  password: ''
 });
 
 var downloadDir = '../tmp';
