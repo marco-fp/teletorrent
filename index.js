@@ -2,7 +2,17 @@
 if(process.env.NODE_ENV == 'production'){
   var express = require('express');
   var app = express();
-  listenToPort();
+
+    var port = process.env.PORT || 8080;
+
+    app.listen(port,function(err){
+        if(err) console.log("Server error "+err);
+        else console.log("Server listening at port "+port);
+    });
+
+    app.get('/',function(req,res){
+        res.json("Teletorrent is up!");
+    });
 }
 
 var utils = require('./utils');
@@ -25,54 +35,38 @@ mongoose.connect(db_url, {user: db_user, password: db_password}, function(error)
         console.log("Error connecting to database.", error);
     } else {
         console.log("Successfully connected to database.");
-        startBot();
-    }
-});
 
-function startBot(){
+        var bot = new TelegramBot(process.env.BOT_TOKEN, {polling: true});
 
-  var bot = new TelegramBot(process.env.BOT_TOKEN, {polling: true});
-
-  bot.onText(/\/start/, function (msg) {
-    utils.answerStart(msg, function(res){
-      bot.sendMessage(msg.chat.id, res);
-    });
-  });
-  bot.onText(/\/help/, function (msg) {
-    utils.answerHelp(msg, function(res){
-      bot.sendMessage(msg.chat.id, res);
-    });
-  });
-
-  bot.on('message', function(msg){
-    console.log(msg);
-    processMessage(msg, this);
-  });
-
-  processMessage = function(msg, bot) {
-      if(typeof(msg.document) !== 'undefined'){
-        utils.processDocument(msg, bot);
-      } else {
-        utils.menuSelector(msg.text, function(res){
-          if(res){
+        bot.onText(/\/start/, function (msg) {
+          utils.answerStart(msg, function(res){
             bot.sendMessage(msg.chat.id, res);
-          } else {
-              bot.sendMessage(msg.chat.id, "Error.");
-            }
+          });
         });
-      }
-  }
-};
+        bot.onText(/\/help/, function (msg) {
+          utils.answerHelp(msg, function(res){
+            bot.sendMessage(msg.chat.id, res);
+          });
+        });
 
-function listenToPort(){
-  var port = process.env.PORT || 8080;
+        bot.on('message', function(msg){
+          console.log(msg);
+          processMessage(msg, this);
+        });
 
-  app.listen(port,function(err){
-      if(err) console.log("Server error "+err);
-      else console.log("Server listening at port "+port);
-  });
-
-  app.get('/',function(req,res){
-      res.json("Teletorrent is up!");
-  });
-}
+        processMessage = function(msg, bot) {
+            if(typeof(msg.document) !== 'undefined'){
+              utils.processDocument(msg, bot);
+            } else {
+              utils.menuSelector(msg.text, function(res){
+                if(res){
+                  bot.sendMessage(msg.chat.id, res);
+                } else {
+                    bot.sendMessage(msg.chat.id, "Error.");
+                  }
+              });
+            }
+        }
+    }
+    
+});
