@@ -1,20 +1,3 @@
-
-if(process.env.NODE_ENV == 'production'){
-  var express = require('express');
-  var app = express();
-
-    var port = process.env.PORT || 8080;
-
-    app.listen(port,function(err){
-        if(err) console.log("Server error "+err);
-        else console.log("Server listening at port "+port);
-    });
-
-    app.get('/',function(req,res){
-        res.json("Teletorrent is up!");
-    });
-}
-
 var utils = require('./utils');
 var TelegramBot = require('node-telegram-bot-api');
 
