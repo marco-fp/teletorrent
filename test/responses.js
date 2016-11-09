@@ -1,7 +1,7 @@
 var assert = require('chai').assert; //Assertion library
 var request = require('supertest'); //To test an API rest
 var mongoose = require('mongoose');
-var utils = require('../utils');
+var utils = require('../app/utils');
 
 var dummyMessage = {
     message_id: 666,
