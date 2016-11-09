@@ -1,3 +1,9 @@
+
+if(process.env.NODE_ENV == 'production'){
+  var express = require('express');
+  var app = express();
+}
+
 var utils = require('./utils');
 var TelegramBot = require('node-telegram-bot-api');
 
@@ -9,6 +15,7 @@ var db_user = process.env.DB_USER || null;
 var db_password = process.env.DB_PASSWORD || null;
 
 if(db_user && db_password && process.env.NODE_ENV == 'production'){
+  console.log("-- PRODUCTION ENV --")
   db_url = 'mongodb://'+ db_user + ':' + db_password + '@ds147497.mlab.com:47497/teletorrent-db';
 }
 
@@ -19,7 +26,6 @@ mongoose.connect(db_url, {user: db_user, password: db_password}, function(error)
         console.log("Successfully connected to database.");
         startBot();
     }
-
 });
 
 function startBot(){
@@ -56,4 +62,20 @@ function startBot(){
       }
   }
 
+  if(process.env.NODE_ENV == 'production'){
+    listenToPort();
+  }
 };
+
+function listenToPort(){
+  var port = process.env.PORT || 8080;
+
+  app.listen(port,function(err){
+      if(err) console.log("Server error "+err);
+      else console.log("Server listening at port "+port);
+  });
+
+  app.get('/',function(req,res){
+      res.json("Teletorrent is up!");
+  });
+}
