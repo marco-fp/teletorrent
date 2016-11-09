@@ -1,12 +1,9 @@
 var utils = require('./utils');
 var TelegramBot = require('node-telegram-bot-api');
 
-var port = process.env.PORT || 8080;
-
 var mongoose = require('mongoose');
 
 var db_url = 'mongodb://localhost/testdb';
-
 
 var db_user = process.env.DB_USER || null;
 var db_password = process.env.DB_PASSWORD || null;
@@ -17,7 +14,7 @@ if(db_user && db_password && process.env.NODE_ENV == 'production'){
 
 mongoose.connect(db_url, {user: db_user, password: db_password}, function(error) {
     if (error) {
-        console.log("Error connecting to database.");
+        console.log("Error connecting to database.", error);
     } else {
         console.log("Successfully connected to database.");
         startBot();
@@ -58,5 +55,5 @@ function startBot(){
         });
       }
   }
-  
+
 };
