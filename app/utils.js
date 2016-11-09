@@ -1,5 +1,5 @@
 // Extender para abarcar también enlaces magnet
-var Download = require('./models/download');
+var Download = require('../models/download');
 
 module.exports = {
   matchesTorrent: function (type){
