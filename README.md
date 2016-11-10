@@ -20,7 +20,7 @@ At the moment, only response tests are written. I'm trying to figure out how to 
 
 Last update involved general improvements on code style, adding configuration files for deploying the application and writing a torrentAPI, wrapping all functionality related to communicating with the torrent client.   Using node-transmission Teletorrent is able to manage remotely any instance of transmission running on another machine.
 
-MongoDB is being used to store downloads information, and it's currently deployed on mLab.
+MongoDB is being used to store downloads information, and it's currently deployed on [mLab](https://mlab.com/).
 
 ## Deployment
 
