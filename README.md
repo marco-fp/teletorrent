@@ -1,6 +1,7 @@
 # Teletorrent
 
-[![Build Status](https://travis-ci.org/MarFerPra/teletorrent.svg?branch=dev)](https://travis-ci.org/MarFerPra/teletorrent)
+[![Build Status](https://travis-ci.org/MarFerPra/teletorrent.svg?branch=dev)](https://travis-ci.org/MarFerPra/teletorrent) [![Telegram.me](http://lelb.net/wp-content/uploads/2016/01/telegram-icon-e1453881760594.png)](https://telegram.me/share/url?url=teletorrent_bot)
+[Deployment](http://teletorrent.herokuapp.com)
 
 Telegram bot that allows you to add and manage torrents on your computer, remotely.
 
