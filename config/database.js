@@ -7,6 +7,8 @@ if(db_user && db_password && process.env.NODE_ENV == 'production'){
   db_url = 'mongodb://'+ db_user + ':' + db_password + '@ds147497.mlab.com:47497/teletorrent-db';
 }
 
+console.log(db_url);
+
 module.exports = {
   url: db_url,
   user: db_user,
