@@ -16,7 +16,6 @@ RUN apt-get update
 RUN apt-get install -y mongodb-org
 
 RUN apt-get install -y nodejs
-RUN node --version
 RUN apt-get install npm
 RUN npm install npm@latest -g
 
