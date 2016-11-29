@@ -1,5 +1,3 @@
-
-
 FROM ubuntu:xenial
 
 MAINTAINER Marco Manuel Fernández Pranno <mfernandezpranno@gmail.com>
@@ -17,8 +15,9 @@ RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiver
 RUN apt-get update
 RUN apt-get install -y mongodb-org
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN apt-get install -y nodejs
+RUN node --version
+RUN apt-get install npm
 RUN npm install npm@latest -g
 
 RUN sudo git clone https://github.com/MarFerPra/teletorrent
