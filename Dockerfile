@@ -1,10 +1,12 @@
+
+
+FROM ubuntu:xenial
+
+MAINTAINER Marco Manuel Fernández Pranno <mfernandezpranno@gmail.com>
+
 ARG BOT_TOKEN=EMPTY
 
 ENC BOT_TOKEN=$BOT_TOKEN
-
-FROM ubuntu:16.04
-MAINTAINER Marco Manuel Fernández Pranno <mfernandezpranno@gmail.com>
-
 
 RUN apt-get -y update
 RUN apt-get install -y build-essential
