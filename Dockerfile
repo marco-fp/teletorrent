@@ -16,7 +16,7 @@ RUN apt-get update
 RUN apt-get install -y mongodb-org
 
 RUN apt-get install -y nodejs
-RUN apt-get install npm
+RUN apt-get install -y npm
 RUN npm install npm@latest -g
 
 RUN sudo git clone https://github.com/MarFerPra/teletorrent
