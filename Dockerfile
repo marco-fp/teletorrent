@@ -6,7 +6,7 @@ MAINTAINER Marco Manuel Fernández Pranno <mfernandezpranno@gmail.com>
 
 ARG BOT_TOKEN=EMPTY
 
-ENC BOT_TOKEN=$BOT_TOKEN
+ENV BOT_TOKEN=$BOT_TOKEN
 
 RUN apt-get -y update
 RUN apt-get install -y build-essential
