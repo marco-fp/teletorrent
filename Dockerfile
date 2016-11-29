@@ -15,7 +15,7 @@ RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiver
 RUN apt-get update
 RUN apt-get install -y mongodb-org
 
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs 
 RUN apt-get install -y npm
 RUN npm install npm@latest -g
 
