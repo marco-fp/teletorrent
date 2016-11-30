@@ -42,7 +42,7 @@ As seen on the image, Teletorrent has automatic builds enabled on DockerHub:
 
 ![DockerHubBuilds](http://i1268.photobucket.com/albums/jj576/marcofp0/IV%20P4/docker-img_zpsjmo2jjen.png)  
 
-To download the container use the order: `sudo docker pull marcofp/teletorrent-bot`
+To download the container use the order: `sudo docker pull marcofp/teletorrent-bot`  
 And to run the container with its proper enviroment variables use:
 
 `sudo docker run -e "BOT_TOKEN=<bot_token_here>" -e "DB_URL=<mongoDB_URL_here>" -i -t marcofp/teletorrent-bot /bin/bash`  
