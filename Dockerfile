@@ -2,21 +2,17 @@ FROM ubuntu:16.04
 
 MAINTAINER Marco Manuel Fernández Pranno <mfernandezpranno@gmail.com>
 
-ARG BOT_TOKEN=EMPTY
+ARG BOT_TOKEN
+ARG DB_URL
 
 ENV BOT_TOKEN=$BOT_TOKEN
+ENV DB_URL=$DB_URL
 
 RUN apt-get -y update
 RUN apt-get install -y build-essential
 RUN apt-get install -y git
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 RUN apt-get update
-RUN apt-get install -y mongodb-org
-RUN chown -R mongodb:mongodb /var/lib/mongodb/.
-RUN touch /var/log/mongodb.log
-RUN chown -R mongodb:mongodb /var/log/mongodb.log
 
 RUN apt-get install -y nodejs
 RUN apt-get install -y npm
