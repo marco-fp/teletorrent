@@ -21,4 +21,5 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN git clone https://github.com/MarFerPra/teletorrent
 RUN cd teletorrent/
-RUN make install
+RUN mkdir -p database
+RUN npm install --silent
