@@ -1,5 +1,6 @@
 install:
-	mkdir -p database && npm install --silent
+	mkdir -p database
+	npm install --silent
 
 test:
 	npm test
