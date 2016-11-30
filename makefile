@@ -5,5 +5,5 @@ test:
 	npm test
 	
 execute:
-	mongod --dbpath database &
+	mongod —fork —dbpath /var/lib/mongodb/ —smallfiles —logpath /var/log/mongodb.log —logappend
 	node index.js
