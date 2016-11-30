@@ -1,5 +1,6 @@
 install:
 	mkdir database && npm install
+	
 test:
 	npm test
 	
