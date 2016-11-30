@@ -21,4 +21,4 @@ RUN npm install npm@latest -g
 
 RUN git clone https://github.com/MarFerPra/teletorrent
 RUN cd teletorrent/
-RUN make install
+#RUN make install
