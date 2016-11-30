@@ -1,53 +1,54 @@
-# Teletorrent
+# Teletorrent Documentation
 
 [![Build Status](https://travis-ci.org/MarFerPra/teletorrent.svg?branch=dev)](https://travis-ci.org/MarFerPra/teletorrent) [![Telegram.me](http://lelb.net/wp-content/uploads/2016/01/telegram-icon-e1453881760594.png)](https://telegram.me/share/url?url=teletorrent_bot)
 [Deployment](http://teletorrent.herokuapp.com)
+[![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/marcofp/teletorrent-bot/)  
 
-Telegram bot that allows you to add and manage torrents on your computer, remotely.
+### Docker containers testing environment
 
-This project is being developed using [Node.js](https://nodejs.org/en/), [Node telegram bot API](https://github.com/yagop/node-telegram-bot-api) and [Node-transmission](https://github.com/FLYBYME/node-transmission).
+First of all, consider taking a look at the Dockerfile contents in order to understand the container initialization:
 
-Using the latter to manage the torrents from the server application, answers petitions from any authorized Telegram client. (Would be really cool to develop an Electron client to connect to it too)
+```
+FROM ubuntu:16.04
 
-The main objective of the project besides the functionality itself is to learn the proper way to work using DevOps concepts and how to successfully deploy and manage the service running on a cloud server.
+MAINTAINER Marco Manuel Fernández Pranno <mfernandezpranno@gmail.com>
 
-## Services
+ARG BOT_TOKEN
+ARG DB_URL
 
-Teletorrent is be deployed on a cloud server on Heroku, and communicate with Telegram's bot API services to interact with the users. During development it's features are being tested using a CI tool, following TDD practices.
+ENV BOT_TOKEN=$BOT_TOKEN
+ENV DB_URL=$DB_URL
 
-For CI I'm currently using [Travis CI](https://travis-ci.org/MarFerPra/teletorrent), and launching the tests with mocha (using chai and supertest packages).
-At the moment, only response tests are written. I'm trying to figure out how to properly emulate a conversation with a user to be able to test all functionallity in the most realistic approach.
+RUN apt-get -y update
+RUN apt-get install -y build-essential
+RUN apt-get install -y git
 
-Last update involved general improvements on code style, adding configuration files for deploying the application and writing a torrentAPI, wrapping all functionality related to communicating with the torrent client.   Using node-transmission Teletorrent is able to manage remotely any instance of transmission running on another machine.
+RUN apt-get update
 
-MongoDB is being used to store downloads information, and it's currently deployed on [mLab](https://mlab.com/).
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
+RUN npm install npm@latest -g
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 
-## Deployment
+RUN git clone https://github.com/MarFerPra/teletorrent
+RUN cd teletorrent/
+RUN mkdir -p database
+RUN npm install --silent
 
-* Fork this repository
-* Create account on Heroku and mLab.
-* On mLab create a database, along with its user and password.
-* On Heroku create the application instance and add the deployment method to Github, using your fork of the project.  
-* Optional: Enable automatic deploys and waiting for CI (Travis) to pass before each deploy.
-* In Heroku, go to Settings and add the following configuration variables:
-  * `BOT_TOKEN : <your_bot_token>`
-  * `DB_PASSWORD: <your_db_password>`
-  * `DB_USER: <your_db_user>`
-  * `NODE_ENV: 'production'` (This may be automatically set, but just to be sure.)
+```
 
-Teletorrent should be deployed and ready work, just make sure to add to `config/transmission.js` your transmission client information to be able to access it.
+If you don't have an account on [DockerHub](https://hub.docker.com/), I strongly recommend you to create one.  
+As seen on the image, Teletorrent has automatic builds enabled on DockerHub:
 
-## Local Installation
-First, you need to create a telegram bot using [BotFather](https://telegram.me/botfather):
+![DockerHubBuilds](http://i1268.photobucket.com/albums/jj576/marcofp0/IV%20P4/docker-img_zpsjmo2jjen.png)  
 
-1. Clone the repository
-2. Execute `npm install`
+To download the container use the order: `sudo docker pull marcofp/teletorrent-bot`
+And to run the container with its proper enviroment variables use:
 
-## Usage
-1. Execute `BOT_TOKEN=<your_bot_token> npm start`
-2. Connect to your bot from any telegram client
+`sudo docker run -e "BOT_TOKEN=<bot_token_here>" -e "DB_URL=<mongoDB_URL_here>" -i -t marcofp/teletorrent-bot /bin/bash`  
 
-## Test
-`npm test`
+Adding your own remote database url (with its user and password) and your bot token.  
 
-Go to the [project's website](https://marferpra.github.io/teletorrent/) for more info.
+After that, you should be able to run the project using: `cd teletorrent-bot && npm start`
+
+If you encounter any issue, please make sure to run `npm install` to set up the dependencies properly before running.
