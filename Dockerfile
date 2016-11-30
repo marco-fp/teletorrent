@@ -18,7 +18,8 @@ RUN apt-get install -y mongodb-org
 RUN apt-get install -y nodejs
 RUN apt-get install -y npm
 RUN npm install npm@latest -g
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN git clone https://github.com/MarFerPra/teletorrent
 RUN cd teletorrent/
-#RUN make install
+RUN make install
