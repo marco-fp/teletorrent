@@ -21,14 +21,14 @@ def remove():
 def test():
     run ('cd teletorrent && sudo npm test')
 
-def install():
+def install_dependencies():
     run ('cd teletorrent && sudo npm install --silent')
 
-def install_node():
-    run ('suro apt-get remove -y --purge nodejs')
+def setup_node():
+    run ('sudo apt-get remove -y --purge nodejs')
     run ('curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -')
     run ('sudo apt-get install -y nodejs')
-    run ('npm install npm@latest -g')
+    run ('sudo npm install npm@latest -g')
 
 def ping():
     run('echo Ping_received')

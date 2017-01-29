@@ -9,3 +9,5 @@ sudo vagrant up --provider=azure
 sudo apt-get install -y python-pip
 sudo pip install --upgrade pip
 sudo pip install fabric
+fab -p 'secretpassword00!' -H marco@teletorrentBot.cloudapp.net setup_node
+fab -p 'secretpassword00!' -H marco@teletorrentBot.cloudapp.net install_dependencies
