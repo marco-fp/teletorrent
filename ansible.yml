@@ -1,7 +1,7 @@
 ---
 - hosts: default
   remote_user: marco
-  sudo: yes
+  become: true
   vars:
    BOT_TOKEN: "{{ lookup('env','BOT_TOKEN') }}"
    DB_PASSWORD: "{{ lookup('env','DB_PASSWORD')}}"
@@ -18,14 +18,16 @@
     command: apt-get install -y python-pip
   - name: Update pip
     command: pip install --upgrade pip
-  - name: Installing nodejs
-    command: curl -sL https://deb.nodesource.com/setup_6.x > nodesource_setup.sh
-    command: chmod +x nodesource_setup.sh
-    command: ./nodesource_setup.sh
-    command: apt-get install -y nodejs
+  - name: Descargar script instalación Node
+    get_url: url=https://deb.nodesource.com/setup_6.x dest=./setup_6.x mode=0550
+  - name: Ejecutar script de instalación de Node
+    command: ./setup_6.x
+  - name: Instalar Node
+    apt: name=nodejs state=present
   - name: Updating npm
     command: npm install npm@latest -g
   - name: Cloning project repository
     shell: git clone https://github.com/MarFerPra/teletorrent
   - name: Installing Teletorrent dependencies
-    command: cd teletorrent && sudo npm install --silent
+    command: cd teletorrent
+    command: npm install --silent
