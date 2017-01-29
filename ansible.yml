@@ -19,7 +19,7 @@
   - name: Update pip
     command: pip install --upgrade pip
   - name: Installing nodejs
-    command: curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+    command: curl -sL https://deb.nodesource.com/setup_6.x > nodesource_setup.sh
     command: chmod +x nodesource_setup.sh
     command: ./nodesource_setup.sh
     command: apt-get install -y nodejs
@@ -28,5 +28,4 @@
   - name: Cloning project repository
     shell: git clone https://github.com/MarFerPra/teletorrent
   - name: Installing Teletorrent dependencies
-    command: cd teletorrent/
-    command: npm install --silent
+    command: cd teletorrent && sudo npm install --silent

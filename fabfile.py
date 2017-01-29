@@ -18,7 +18,7 @@ def test():
     run ('cd teletorrent && sudo npm test')
 
 def install():
-    run ('cd teletorrent && sudo make install --silent')
+    run ('cd teletorrent && sudo npm install --silent')
 
 def ping():
     run('echo Ping_received')
