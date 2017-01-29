@@ -21,14 +21,10 @@
     command: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   - name: Installing nodejs
     command: apt-get install -y nodejs
-  - name: Installing npm
-    command: apt-get install -y npm
-  - name: Updating node
+  - name: Updating npm
     command: npm install npm@latest -g
-  - name: Setting up nodejs
-    command: ln -s /usr/bin/nodejs /usr/bin/node
   - name: Cloning project repository
-    shell: rm -rf teletorrent && git clone https://github.com/MarFerPra/teletorrent
+    shell: git clone https://github.com/MarFerPra/teletorrent
   - name: Installing Teletorrent dependencies
     command: cd teletorrent/
     command: npm install --silent
