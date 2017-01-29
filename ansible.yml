@@ -18,12 +18,12 @@
     command: apt-get install -y python-pip
   - name: Update pip
     command: pip install --upgrade pip
-  - name: Descargar script instalación Node
-    get_url: url=https://deb.nodesource.com/setup_6.x dest=./setup_6.x mode=0550
-  - name: Ejecutar script de instalación de Node
-    command: ./setup_6.x
+  - name: Add node repository
+    apt_repository:
+      repo: 'https://deb.nodesource.com/setup_6.x {{ ansible_distribution_release }} main'
+      update_cache: yes
   - name: Instalar Node
-    apt: name=nodejs state=present
+    apt: name=nodejs
   - name: Updating npm
     command: npm install npm@latest -g
   - name: Cloning project repository
