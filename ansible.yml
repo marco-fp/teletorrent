@@ -29,5 +29,4 @@
     shell: rm -rf teletorrent && git clone https://github.com/MarFerPra/teletorrent
   - name: Installing Teletorrent dependencies
     command: cd teletorrent/
-    command: mkdir -p database
     command: npm install --silent

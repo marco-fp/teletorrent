@@ -1,9 +1,8 @@
 install:
-	mkdir -p database
-	npm install --silent
+	sudo npm install --silent
 
 test:
-	npm test
+	sudo npm test
 
 execute:
-	npm start
+	sudo npm start
