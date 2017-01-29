@@ -17,6 +17,8 @@
     command: apt-get install -y python-pip
   - name: Update pip
     command: pip install --upgrade pip
+  - name: Adding node repository
+    command: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   - name: Installing nodejs
     command: apt-get install -y nodejs
   - name: Installing npm
