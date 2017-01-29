@@ -6,6 +6,7 @@
    BOT_TOKEN: "{{ lookup('env','BOT_TOKEN') }}"
    DB_PASSWORD: "{{ lookup('env','DB_PASSWORD')}}"
    DB_USER: "{{ lookup('env','DB_USER')}}"
+   DB_USER: "{{ lookup('env','NODE_ENV')}}"
   tasks:
   - name: Updating repositories
     command: apt-get update
