@@ -18,16 +18,5 @@
     command: apt-get install -y python-pip
   - name: Update pip
     command: pip install --upgrade pip
-  - name: Add node repository
-    apt_repository: url=https://deb.nodesource.com/setup_6.x dest=./setup_6.x mode=0550
-  - name: Ejecutar script de instalación de Node
-    command: ./setup_6.x
-  - name: Instalar Node
-    apt: name=nodejs state=present
-  - name: Updating npm
-    command: npm install npm@latest -g
   - name: Cloning project repository
     shell: git clone https://github.com/MarFerPra/teletorrent
-  - name: Installing Teletorrent dependencies
-    command: cd teletorrent
-    command: npm install --silent

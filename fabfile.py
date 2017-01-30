@@ -22,7 +22,7 @@ def test():
     run ('cd teletorrent && sudo npm test')
 
 def install_dependencies():
-    run ('cd teletorrent && sudo npm install --silent')
+    run ('(cd teletorrent && sudo npm install --silent) || sudo npm install --silent')
 
 def setup_node():
     run ('sudo apt-get remove -y --purge nodejs')
