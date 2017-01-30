@@ -11,6 +11,43 @@ Using the latter to manage the torrents from the server application, answers pet
 
 The main objective of the project besides the functionality itself is to learn the proper way to work using DevOps concepts and how to successfully deploy and manage the service running on a cloud server.
 
+## Deployment on IaaS (Azure)
+
+Using Azure as IaaS to deploy, Vagrant to create the virtual machine, Ansible and Fabric to setup and manage the service.
+
+**Create Azure certificate**
+
+Using the following orders:
+```
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout <certificate_name>.pem -out <certificate_name>.pem
+
+openssl x509 -inform pem -in nombre_certificado.pem -outform der -out <certificate_name>.cer
+
+chmod 600 <certificate_name>.pem
+```
+
+After the creation, we upload the `.cer` file to Azure and make sure that the `.pem` file is present on the directory from we're going to deploy the bot.
+
+**Deploy on Azure**
+
+To automate the deployment you can simply execute the `deploy.sh` script and let it install and configure the dependencies.  To do so, Vagrant will follow the [ansible file]('./ansible.yml') instructions and then the following fabric methods to finish node's installation and setup.  
+After the execution, use the following order to launch the service:
+
+```
+BOT_TOKEN=<your_bot_token> DB_PASSWORD=<db_password> DB_USER=<db_user>  
+ NODE_ENV=production fab -p '<vm_login_password>' -H  
+ <vm_user>@<azure_app_name>.cloudapp.net <start/start_forever>  
+```  
+
+All environment variables can be specified on the fabric order or defined on the OS (on .bashrc for example).  
+
+The `start` method will launch the bot on the current terminal, which will end when the window is closed. To launch a persistent service use the `start_forever` method.  
+To kill all active bot processes you can make use of `stop_forever`.
+
+You can find more information about the vagrant configuration and fabric methods on the [Vagrantfile]('./Vagrantfile') and the [Fabric file]('./fabfile.py').  
+
+
+
 ## Services
 
 Teletorrent is be deployed on a cloud server on Heroku, and communicate with Telegram's bot API services to interact with the users. During development it's features are being tested using a CI tool, following TDD practices.
@@ -22,7 +59,7 @@ Last update involved general improvements on code style, adding configuration fi
 
 MongoDB is being used to store downloads information, and it's currently deployed on [mLab](https://mlab.com/).
 
-## Deployment
+## Deployment on PaaS
 
 * Fork this repository
 * Create account on Heroku and mLab.
