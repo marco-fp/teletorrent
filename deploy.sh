@@ -12,3 +12,4 @@ sudo pip install --upgrade pip
 sudo pip install fabric
 fab -p 'secretpassword00!' -H marco@teletorrentBot.cloudapp.net setup_node
 fab -p 'secretpassword00!' -H marco@teletorrentBot.cloudapp.net install_dependencies
+echo 'Teletorrent successfully deployed. You may now launch the bot with fabric and the proper env variables.'

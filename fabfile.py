@@ -7,9 +7,13 @@ def start():
     with shell_env(BOT_TOKEN=os.environ['BOT_TOKEN'], DB_PASSWORD=os.environ['DB_PASSWORD'], DB_USER=os.environ['DB_USER'], NODE_ENV=os.environ['NODE_ENV']):
         run ('cd teletorrent && npm start')
 
-def start_background():
+def start_forever():
     with shell_env(BOT_TOKEN=os.environ['BOT_TOKEN'], DB_PASSWORD=os.environ['DB_PASSWORD'], DB_USER=os.environ['DB_USER'], NODE_ENV=os.environ['NODE_ENV']):
-        run ('cd teletorrent && npm start &')
+        run('sudo npm install -g forever')
+        run ('cd teletorrent && forever start index.js')
+
+def stop_forever():
+    run('sudo forever stopall')
 
 def clone():
     run ('sudo rm -rf teletorrent')
@@ -22,7 +26,7 @@ def test():
     run ('cd teletorrent && sudo npm test')
 
 def install_dependencies():
-    run ('(cd teletorrent && sudo npm install --silent) || sudo npm install --silent')
+    run ('cd teletorrent && sudo npm install --silent')
 
 def setup_node():
     run ('sudo apt-get remove -y --purge nodejs')
