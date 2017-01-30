@@ -21,7 +21,7 @@ Using the following orders:
 ```
 openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout <certificate_name>.pem -out <certificate_name>.pem
 
-openssl x509 -inform pem -in nombre_certificado.pem -outform der -out <certificate_name>.cer
+openssl x509 -inform pem -in <certificate_name>.pem -outform der -out <certificate_name>.cer
 
 chmod 600 <certificate_name>.pem
 ```
@@ -30,7 +30,7 @@ After the creation, we upload the `.cer` file to Azure and make sure that the `.
 
 **Deploy on Azure**
 
-To automate the deployment you can simply execute the `deploy.sh` script and let it install and configure the dependencies.  To do so, Vagrant will follow the [ansible file]('./ansible.yml') instructions and then the following fabric methods to finish node's installation and setup.  
+To automate the deployment you can simply execute the `deploy.sh` script and let it install and configure the dependencies.  To do so, Vagrant will follow the [ansible file](./ansible.yml) instructions and then the following fabric methods to finish node's installation and setup.  
 After the execution, use the following order to launch the service:
 
 ```
@@ -44,7 +44,7 @@ All environment variables can be specified on the fabric order or defined on the
 The `start` method will launch the bot on the current terminal, which will end when the window is closed. To launch a persistent service use the `start_forever` method.  
 To kill all active bot processes you can make use of `stop_forever`.
 
-You can find more information about the vagrant configuration and fabric methods on the [Vagrantfile]('./Vagrantfile') and the [Fabric file]('./fabfile.py').  
+You can find more information about the vagrant configuration and fabric methods on the [Vagrantfile](./Vagrantfile) and the [Fabric file](./fabfile.py).  
 
 
 
